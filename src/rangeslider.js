@@ -551,6 +551,7 @@
         constructor: function (player, options) {
             videojsComponent.call(this, player, options);
             this.on('mousedown', this.onMouseDown);
+            this.on('touchstart', this.onMouseDown);
         }
     });
 
@@ -581,16 +582,26 @@
         if (!this.rs.options.locked) {
             videojsOn(document, "mousemove", videojs.bind(this, this.onMouseMove));
             videojsOn(document, "mouseup", videojs.bind(this, this.onMouseUp));
+            videojsOn(document, "touchmove", videojs.bind(this, this.onMouseMove));
+            videojsOn(document, "touchend", videojs.bind(this, this.onMouseUp));
+
         }
     };
 
     videojsSeekRSBar.prototype.onMouseUp = function (event) {
         videojsOff(document, "mousemove", this.onMouseMove, false);
         videojsOff(document, "mouseup", this.onMouseUp, false);
+        videojsOff(document, "touchmove", this.onMouseMove, false);
+        videojsOff(document, "touchend", this.onMouseUp, false);
+
     };
 
     videojsSeekRSBar.prototype.onMouseMove = function (event) {
+        console.log(event);
         var left = this.calculateDistance(event);
+        if (isNaN(left)){
+          debugger;
+        }
 
         if (this.rs.left.pressed)
             this.setPosition(0, left);
@@ -705,6 +716,7 @@
     };
 
     videojsSeekRSBar.prototype.calculateDistance = function (event) {
+        
         var rstbX = this.getRSTBX();
         var rstbW = this.getRSTBWidth();
         var handleW = this.getWidth();
@@ -713,8 +725,15 @@
         rstbX = rstbX + (handleW / 2);
         rstbW = rstbW - handleW;
 
+        var pageX;
+        if (event.changedTouches) {
+          pageX = event.changedTouches[0].pageX;
+        } else {
+          pageX = event.pageX;
+        }
+        
         // Percent that the click is through the adjusted area
-        return Math.max(0, Math.min(1, (event.pageX - rstbX) / rstbW));
+        return Math.max(0, Math.min(1, (pageX - rstbX) / rstbW));
     };
 
     videojsSeekRSBar.prototype.getRSTBWidth = function () {
@@ -741,6 +760,7 @@
         constructor: function (player, options) {
             videojsComponent.call(this, player, options);
             this.on('mouseup', this.onMouseUp);
+            this.on('touchend', this.onMouseUp);
             this.fired = false;
         }
     });
@@ -854,6 +874,7 @@
         constructor: function (player, options) {
             videojsComponent.call(this, player, options);
             this.on('mousedown', this.onMouseDown);
+            this.on('touchstart', this.onMouseDown);
             this.pressed = false;
         }
     });
@@ -875,12 +896,14 @@
         if (!this.rs.options.locked) {
             this.pressed = true;
             videojsOn(document, "mouseup", videojs.bind(this, this.onMouseUp));
+            videojsOn(document, "touchend", videojs.bind(this, this.onMouseUp));
             videojsAddClass(this.el_, 'active');
         }
     };
 
     videojsSelectionBarLeft.prototype.onMouseUp = function (event) {
         videojsOff(document, "mouseup", this.onMouseUp, false);
+        videojsOff(document, "touchend", this.onMouseUp, false);
         videojsRemoveClass(this.el_, 'active');
         if (!this.rs.options.locked) {
             this.pressed = false;
@@ -901,6 +924,7 @@
         constructor: function (player, options) {
             videojsComponent.call(this, player, options);
             this.on('mousedown', this.onMouseDown);
+            this.on('touchstart', this.onMouseDown);
             this.pressed = false;
         }
     });
@@ -923,12 +947,14 @@
         if (!this.rs.options.locked) {
             this.pressed = true;
             videojsOn(document, "mouseup", videojs.bind(this, this.onMouseUp));
+            videojsOn(document, "touchend", videojs.bind(this, this.onMouseUp));
             videojsAddClass(this.el_, 'active');
         }
     };
 
     videojsSelectionBarRight.prototype.onMouseUp = function (event) {
         videojsOff(document, "mouseup", this.onMouseUp, false);
+        videojsOff(document, "touchend", this.onMouseUp, false);
         videojsRemoveClass(this.el_, 'active');
         if (!this.rs.options.locked) {
             this.pressed = false;
