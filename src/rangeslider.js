@@ -597,11 +597,7 @@
     };
 
     videojsSeekRSBar.prototype.onMouseMove = function (event) {
-        console.log(event);
         var left = this.calculateDistance(event);
-        if (isNaN(left)){
-          debugger;
-        }
 
         if (this.rs.left.pressed)
             this.setPosition(0, left);
