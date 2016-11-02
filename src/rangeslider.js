@@ -580,19 +580,19 @@
         videojsBlockTextSelection();
 
         if (!this.rs.options.locked) {
-            videojsOn(document, "mousemove", videojs.bind(this, this.onMouseMove));
-            videojsOn(document, "mouseup", videojs.bind(this, this.onMouseUp));
-            videojsOn(document, "touchmove", videojs.bind(this, this.onMouseMove));
-            videojsOn(document, "touchend", videojs.bind(this, this.onMouseUp));
+            this.on(document, "mousemove", videojs.bind(this, this.onMouseMove));
+            this.on(document, "mouseup", videojs.bind(this, this.onMouseUp));
+            this.on(document, "touchmove", videojs.bind(this, this.onMouseMove));
+            this.on(document, "touchend", videojs.bind(this, this.onMouseUp));
 
         }
     };
 
     videojsSeekRSBar.prototype.onMouseUp = function (event) {
-        videojsOff(document, "mousemove", this.onMouseMove, false);
-        videojsOff(document, "mouseup", this.onMouseUp, false);
-        videojsOff(document, "touchmove", this.onMouseMove, false);
-        videojsOff(document, "touchend", this.onMouseUp, false);
+        this.off(document, "mousemove", videojs.bind(this, this.onMouseMove), false);
+        this.off(document, "mouseup", videojs.bind(this, this.onMouseUp), false);
+        this.off(document, "touchmove", videojs.bind(this, this.onMouseMove), false);
+        this.off(document, "touchend", videojs.bind(this, this.onMouseUp), false);
 
     };
 
@@ -891,15 +891,15 @@
         videojsBlockTextSelection();
         if (!this.rs.options.locked) {
             this.pressed = true;
-            videojsOn(document, "mouseup", videojs.bind(this, this.onMouseUp));
-            videojsOn(document, "touchend", videojs.bind(this, this.onMouseUp));
+            this.on(document, "mouseup", videojs.bind(this, this.onMouseUp));
+            this.on(document, "touchend", videojs.bind(this, this.onMouseUp));
             videojsAddClass(this.el_, 'active');
         }
     };
 
     videojsSelectionBarLeft.prototype.onMouseUp = function (event) {
-        videojsOff(document, "mouseup", this.onMouseUp, false);
-        videojsOff(document, "touchend", this.onMouseUp, false);
+        this.off(document, "mouseup", videojs.bind(this, this.onMouseUp), false);
+        this.off(document, "touchend", videojs.bind(this, this.onMouseUp), false);
         videojsRemoveClass(this.el_, 'active');
         if (!this.rs.options.locked) {
             this.pressed = false;
@@ -942,15 +942,15 @@
         videojsBlockTextSelection();
         if (!this.rs.options.locked) {
             this.pressed = true;
-            videojsOn(document, "mouseup", videojs.bind(this, this.onMouseUp));
-            videojsOn(document, "touchend", videojs.bind(this, this.onMouseUp));
+            this.on(document, "mouseup", videojs.bind(this, this.onMouseUp));
+            this.on(document, "touchend", videojs.bind(this, this.onMouseUp));
             videojsAddClass(this.el_, 'active');
         }
     };
 
     videojsSelectionBarRight.prototype.onMouseUp = function (event) {
-        videojsOff(document, "mouseup", this.onMouseUp, false);
-        videojsOff(document, "touchend", this.onMouseUp, false);
+        this.off(document, "mouseup", videojs.bind(this, this.onMouseUp), false);
+        this.off(document, "touchend", videojs.bind(this, this.onMouseUp), false);
         videojsRemoveClass(this.el_, 'active');
         if (!this.rs.options.locked) {
             this.pressed = false;
