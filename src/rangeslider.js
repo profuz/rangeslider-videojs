@@ -36,12 +36,6 @@
  */
 //----------------Load Plugin----------------//
 (function () {
-    var videojsOn = function (element, eventName, func, flag) {
-        element.addEventListener(eventName, func, flag);
-    };
-    var videojsOff = function (element, eventName, func, flag) {
-        element.removeEventListener(eventName, func, flag);
-    };
     var videojsAddClass = function (element, className) {
         element.classList.add(className);
     };
@@ -546,7 +540,7 @@
      * @param {Object=} options
      * @constructor
      */
-    var videojsSeekRSBar = videojs.extend(videojsComponent, {
+    var videojsSeekRSBar = videojs.extend(videojsSeekBar, {
         /** @constructor */
         constructor: function (player, options) {
             videojsComponent.call(this, player, options);
@@ -709,37 +703,6 @@
             }
         }
         return true;
-    };
-
-    videojsSeekRSBar.prototype.calculateDistance = function (event) {
-        
-        var rstbX = this.getRSTBX();
-        var rstbW = this.getRSTBWidth();
-        var handleW = this.getWidth();
-
-        // Adjusted X and Width, so handle doesn't go outside the bar
-        rstbX = rstbX + (handleW / 2);
-        rstbW = rstbW - handleW;
-
-        var pageX;
-        if (event.changedTouches) {
-          pageX = event.changedTouches[0].pageX;
-        } else {
-          pageX = event.pageX;
-        }
-        
-        // Percent that the click is through the adjusted area
-        return Math.max(0, Math.min(1, (pageX - rstbX) / rstbW));
-    };
-
-    videojsSeekRSBar.prototype.getRSTBWidth = function () {
-        return this.el_.offsetWidth;
-    };
-    videojsSeekRSBar.prototype.getRSTBX = function () {
-        return videojsFindPosition(this.el_).left;
-    };
-    videojsSeekRSBar.prototype.getWidth = function () {
-        return this.rs.left.el_.offsetWidth;//does not matter left or right
     };
 
     videojs.registerComponent('SeekRSBar', videojsSeekRSBar);
