@@ -35,6 +35,9 @@
  limitations under the License.
  */
 //----------------Load Plugin----------------//
+
+import videojs from 'video.js';
+
 (function () {
     var videojsAddClass = function (element, className) {
         element.classList.add(className);
@@ -685,7 +688,7 @@
                 var time = TimeText.split(":"),
                         h, m, s;
                 if (time.length == 2) {
-                    h = 00;
+                    h = 0;
                     m = time[0];
                     s = time[1];
                 } else {

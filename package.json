@@ -1,0 +1,9 @@
+{
+  "name": "rangeslider-videojs",
+  "description": "This is a plugin to create a range slider to select a region of the video",
+  "version": "1.0.0",
+  "main": "src/rangeslider.js",
+  "peerDependencies": {
+    "video.js": ">=4"
+  }
+}
