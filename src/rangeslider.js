@@ -1072,7 +1072,7 @@ import videojs from 'video.js';
     videojsControlTimePanelLeft.prototype.createEl = function () {
         return videojsComponent.prototype.createEl.call(this, 'div', {
             className: 'vjs-controltimepanel-left-RS',
-            innerHTML: 'Start: <input type="text" id="controltimepanel" maxlength="2" value="00"/>:<input type="text" id="controltimepanel" maxlength="2" value="00"/>:<input type="text" id="controltimepanel" maxlength="2" value="00"/>'
+            innerHTML: 'Start: <input type="text" maxlength="2" value="00"/>:<input type="text" maxlength="2" value="00"/>:<input type="text" maxlength="2" value="00"/>'
         });
     };
 
@@ -1112,7 +1112,7 @@ import videojs from 'video.js';
     videojsControlTimePanelRight.prototype.createEl = function () {
         return videojsComponent.prototype.createEl.call(this, 'div', {
             className: 'vjs-controltimepanel-right-RS',
-            innerHTML: 'End: <input type="text" id="controltimepanel" maxlength="2" value="00"/>:<input type="text" id="controltimepanel" maxlength="2" value="00"/>:<input type="text" id="controltimepanel" maxlength="2" value="00"/>'
+            innerHTML: 'End: <input type="text" maxlength="2" value="00"/>:<input type="text" maxlength="2" value="00"/>:<input type="text" maxlength="2" value="00"/>'
         });
     };
 
