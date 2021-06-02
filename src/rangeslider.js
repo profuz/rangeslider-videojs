@@ -546,7 +546,7 @@ import videojs from 'video.js';
     var videojsSeekRSBar = videojs.extend(videojsSeekBar, {
         /** @constructor */
         constructor: function (player, options) {
-            videojsComponent.call(this, player, options);
+            videojsSeekBar.call(this, player, options);
             this.on('mousedown', this.onMouseDown);
             this.on('touchstart', this.onMouseDown);
         }
